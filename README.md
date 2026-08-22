@@ -66,5 +66,5 @@ Everything is set from the panel. The stored shape is:
 ## Install
 
 ```bash
-omarchy plugin add <repo-url> --enable --yes
+omarchy plugin add https://github.com/andreconde21/omarchy-quattro-corners.git --enable --yes
 ```
