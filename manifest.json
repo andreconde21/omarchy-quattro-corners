@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "andreconde.quattro-corners",
+  "name": "Quattro Corners",
+  "version": "0.2.0",
+  "author": "André Conde",
+  "license": "MIT",
+  "description": "macOS-style hot corners for Omarchy, with per-corner actions, custom commands, and an adjustable hold time.",
+  "kinds": ["service", "bar-widget"],
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Quattro Corners",
+    "description": "Assign an action to each screen corner.",
+    "category": "Desktop",
+    "aliases": ["corners", "hot-corners"],
+    "allowMultiple": false,
+    "defaults": {
+      "enabled": true,
+      "dwellMs": 400,
+      "targetSize": 24,
+      "topLeftAction": "menu",
+      "topRightAction": "notifications",
+      "bottomLeftAction": "clipboard",
+      "bottomRightAction": "dnd",
+      "topLeftCommand": "",
+      "topRightCommand": "",
+      "bottomLeftCommand": "",
+      "bottomRightCommand": ""
+    },
+    "schema": [
+      { "key": "enabled", "type": "bool", "label": "Hot corners enabled", "defaultValue": true },
+      { "key": "dwellMs", "type": "integer", "label": "Hold time (ms)", "defaultValue": 400, "min": 120, "max": 1500, "step": 20 },
+      { "key": "targetSize", "type": "integer", "label": "Corner size (px)", "defaultValue": 24, "min": 8, "max": 80, "step": 2 },
+      { "key": "topLeftAction", "type": "string", "label": "Top-left action", "defaultValue": "menu" },
+      { "key": "topRightAction", "type": "string", "label": "Top-right action", "defaultValue": "notifications" },
+      { "key": "bottomLeftAction", "type": "string", "label": "Bottom-left action", "defaultValue": "clipboard" },
+      { "key": "bottomRightAction", "type": "string", "label": "Bottom-right action", "defaultValue": "dnd" },
+      { "key": "topLeftCommand", "type": "string", "label": "Top-left custom command", "defaultValue": "" },
+      { "key": "topRightCommand", "type": "string", "label": "Top-right custom command", "defaultValue": "" },
+      { "key": "bottomLeftCommand", "type": "string", "label": "Bottom-left custom command", "defaultValue": "" },
+      { "key": "bottomRightCommand", "type": "string", "label": "Bottom-right custom command", "defaultValue": "" }
+    ]
+  }
+}
