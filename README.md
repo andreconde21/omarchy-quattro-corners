@@ -68,3 +68,15 @@ Everything is set from the panel. The stored shape is:
 ```bash
 omarchy plugin add https://github.com/andreconde21/omarchy-quattro-corners.git --enable --yes
 ```
+
+## Remove
+
+```bash
+omarchy plugin remove andreconde.quattro-corners --yes
+```
+
+The corner targets disappear with the plugin. Nothing else on the system is touched.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
