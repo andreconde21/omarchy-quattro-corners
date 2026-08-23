@@ -67,11 +67,21 @@ Panel {
     bottomRightCommand = String(setting("bottomRightCommand", ""))
   }
 
+  // Coerce to a known action before the value is used. An unrecognised string
+  // from shell.json would otherwise be echoed verbatim by Dropdown's
+  // currentLabel() fallback into an AutoText sink.
+  function knownAction(value) {
+    var candidate = String(value === undefined || value === null ? "" : value)
+    for (var i = 0; i < actionOptions.length; i++)
+      if (actionOptions[i].value === candidate) return candidate
+    return "none"
+  }
+
   function actionOf(key) {
-    if (key === "topLeft") return topLeftAction
-    if (key === "topRight") return topRightAction
-    if (key === "bottomLeft") return bottomLeftAction
-    return bottomRightAction
+    if (key === "topLeft") return knownAction(topLeftAction)
+    if (key === "topRight") return knownAction(topRightAction)
+    if (key === "bottomLeft") return knownAction(bottomLeftAction)
+    return knownAction(bottomRightAction)
   }
 
   function setAction(key, value) {
@@ -301,8 +311,11 @@ Panel {
                 text: root.commandOf(modelData.key)
                 placeholderText: "Shell command, e.g. omarchy-launch-webapp …"
                 foreground: root.foreground
-                onTextChanged: root.setCommand(modelData.key, text)
-                onAccepted: root.save()
+                // Commit on Enter or focus-loss, not per keystroke. Writing every
+                // intermediate value meant nudging any other control mid-edit
+                // persisted a half-typed command — which the corner would then
+                // run. It must only ever run what was actually finished.
+                onEditingFinished: { root.setCommand(modelData.key, text); root.save() }
               }
 
               Button {
@@ -313,7 +326,7 @@ Panel {
                 fontFamily: root.fontFamily
                 fontSize: Style.font.caption
                 tooltipText: "Store this command for " + modelData.label
-                onClicked: root.save()
+                onClicked: { root.setCommand(modelData.key, commandField.text); root.save() }
               }
             }
           }

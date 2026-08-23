@@ -36,6 +36,10 @@ Pick **Custom Command…** for a corner and a text field appears underneath it. 
 
 - Omarchy 4 / Quickshell plugin support
 - Hyprland (only for the "Turn Display Off" action)
+- `omarchy-shell`, which ships with Omarchy
+
+Corner actions summon other first-party plugins — Omarchy Menu, Clipboard History, Emoji Picker,
+notifications. If one of those is disabled, the corner assigned to it does nothing.
 
 ## Configuration
 
