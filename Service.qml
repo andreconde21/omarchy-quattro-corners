@@ -16,10 +16,12 @@ Item {
   // therefore resolve its own record out of shell.json. Precedence matches
   // shell.updateEntryInline(): the bar layout entry wins over the top-level
   // plugins[] entry, so the panel and the service always read what the panel
-  // last wrote. Binding to shell.shellConfig keeps this live, so edits in the
-  // panel take effect without restarting the shell.
+  // last wrote. Newer hosts expose only barConfig through the scoped shell
+  // API; older hosts expose shellConfig. Keep both paths reactive so panel
+  // edits take effect without restarting the shell.
   readonly property var settings: {
     var config = shell ? shell.shellConfig : null
+    if (!config && shell) config = { bar: shell.barConfig }
     if (!config) return ({})
 
     var layout = config.bar && config.bar.layout ? config.bar.layout : null

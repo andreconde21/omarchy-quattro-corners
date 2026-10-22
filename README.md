@@ -66,6 +66,7 @@ Everything is set from the panel. The stored shape is:
 
 - A corner fires once per entry. Resting in the corner does not repeat it; leaving and returning re-arms it.
 - The plugin ships both a service (the corner targets) and a bar widget (the configuration panel). The service reads its settings straight from `shell.json`, so changes made in the panel apply without restarting the shell.
+- If the service still uses old actions after updating the plugin, run `omarchy restart shell` once to clear cached plugin code.
 
 ## Install
 
